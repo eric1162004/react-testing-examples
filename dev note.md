@@ -34,3 +34,6 @@ We don't want to test our frontend with a live backend.
 Network connection can be slow. 
 Backend can be offline
 `npm i -D msw@2.1.6`
+
+## Generating Fake Data
+`npm install @faker-js/faker --save-dev`
