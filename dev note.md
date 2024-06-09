@@ -37,3 +37,5 @@ Backend can be offline
 
 ## Generating Fake Data
 `npm install @faker-js/faker --save-dev`
+
+`npm i -D @mswjs/data@0.16.1`
