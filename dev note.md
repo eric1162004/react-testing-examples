@@ -21,3 +21,6 @@ ncludes matchers for writing assertions against DOM elements.
 ## Testing Component
 - how they render
 - how they respond to user actions
+
+## User interaction
+`npm install --save-dev @testing-library/user-event`
