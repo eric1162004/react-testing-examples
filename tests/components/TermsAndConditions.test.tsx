@@ -30,3 +30,4 @@ describe('TermsAndConditions', () => {
         expect(screen.getByRole('button', {name: /submit/i})).toBeEnabled()
     })
 })
+

@@ -24,3 +24,7 @@ ncludes matchers for writing assertions against DOM elements.
 
 ## User interaction
 `npm install --save-dev @testing-library/user-event`
+
+## getByRole and queryByRole
+Use getByRole when you expect a specific element with a certain role to be present in your component.
+Use queryByRole when you're unsure if an element with a specific role exists or not.
