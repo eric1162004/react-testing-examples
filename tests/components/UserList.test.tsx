@@ -14,6 +14,7 @@ describe('UserList', () => {
             {id: 1, name: 'eric'},
             {id: 2, name: 'billy'},
         ]
+        
         render(<UserList users={users}/>)
 
         users.forEach(user => {
