@@ -17,3 +17,7 @@ configure vitest to use jsdom
 ## jest-dom
 ncludes matchers for writing assertions against DOM elements.
 `npm i -D @testing-library/jest-dom`
+
+## Testing Component
+- how they render
+- how they respond to user actions
