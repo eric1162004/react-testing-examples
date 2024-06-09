@@ -28,3 +28,9 @@ ncludes matchers for writing assertions against DOM elements.
 ## getByRole and queryByRole
 Use getByRole when you expect a specific element with a certain role to be present in your component.
 Use queryByRole when you're unsure if an element with a specific role exists or not.
+
+## Mock Server Worker 
+We don't want to test our frontend with a live backend.
+Network connection can be slow. 
+Backend can be offline
+`npm i -D msw@2.1.6`
