@@ -39,3 +39,7 @@ Backend can be offline
 `npm install @faker-js/faker --save-dev`
 
 `npm i -D @mswjs/data@0.16.1`
+
+## Refactoring UseState with React Query
+benefits: caching, backgorund updates, retries
+you can also use redux for caching but it adds complexity to the project
