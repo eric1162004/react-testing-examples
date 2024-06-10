@@ -1,8 +1,7 @@
-import Onboarding from "../components/Onboarding";
-import TermsAndConditions from "../components/TermsAndConditions";
+import BrowseProducts from "./BrowseProductsPage";
 
 const PlaygroundPage = () => {
-  return <TermsAndConditions />;
+  return <BrowseProducts />;
 };
 
 export default PlaygroundPage;

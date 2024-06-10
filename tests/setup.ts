@@ -5,7 +5,7 @@ import ResizeObserver from "resize-observer-polyfill";
 import { server } from "./mocks/server";
 
 beforeAll(() => server.listen());
-afterEach(() => server.restoreHandlers());
+afterEach(() => server.resetHandlers()); // make sure you use reset, not restore
 afterAll(() => server.close());
 
 // require for testing Radix UI lib
