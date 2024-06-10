@@ -65,3 +65,7 @@ you can also use redux for caching but it adds complexity to the project
 - Log out
 - Change password
 - Update profile data
+
+## Testing Routing
+- route setup
+- invliad routes
