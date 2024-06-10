@@ -44,7 +44,7 @@ Backend can be offline
 benefits: caching, backgorund updates, retries
 you can also use redux for caching but it adds complexity to the project
 
-## Testing form
+## Testing Form
 - input fields
 - default values
 - intial data
@@ -54,3 +54,7 @@ you can also use redux for caching but it adds complexity to the project
 - validation rules
 - form submission
 - form feedback and UX
+
+## Testing State Management Solutions
+- React Context, Redux, Zustand
+- Test the behavior, not the implementation
