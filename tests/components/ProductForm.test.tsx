@@ -62,6 +62,7 @@ describe('ProductForom', () => {
           if (product.price !== undefined)
             await user.type(priceInput, product.price.toString());
 
+          await user.tab() // temp fix for the Act warning in the console
           await user.click(categoryInput);
           const options = screen.getAllByRole('option');
           await user.click(options[0]);
