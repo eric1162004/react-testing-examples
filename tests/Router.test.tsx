@@ -30,10 +30,20 @@ describe('Router', () => {
   });
 
   it('should render the not found page for invalid routes', () => {
-    navigateTo('/invalid-route')
+    navigateTo('/invalid-route');
 
-    expect(screen.getByText(/not found/i)).toBeInTheDocument()
-  })
+    expect(screen.getByText(/not found/i)).toBeInTheDocument();
+  });
 
-  
+  it('should render the admin home page for /admin', () => {
+    navigateTo('/admin');
+
+    expect(screen.getByRole('heading', { name: /admin/i })).toBeInTheDocument();
+  });
+
+  it('should render the admin products page for /admin/products', () => {
+    navigateTo('/admin/products');
+
+    expect(screen.getByRole('heading', { name: /Products/i })).toBeInTheDocument();
+  });
 });
