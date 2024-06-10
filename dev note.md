@@ -43,3 +43,14 @@ Backend can be offline
 ## Refactoring UseState with React Query
 benefits: caching, backgorund updates, retries
 you can also use redux for caching but it adds complexity to the project
+
+## Testing form
+- input fields
+- default values
+- intial data
+- drop-down options
+
+- interaction between fields
+- validation rules
+- form submission
+- form feedback and UX
