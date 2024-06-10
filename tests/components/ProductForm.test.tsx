@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Toaster } from 'react-hot-toast';
 import ProductForm from '../../src/components/ProductForm';
 import { Category, Product } from '../../src/entities';
 import AllProviders from '../AllProviders';
@@ -20,11 +21,21 @@ describe('ProductForom', () => {
   });
 
   const renderComponent = (product?: Product) => {
-    render(<ProductForm product={product} onSubmit={vi.fn()} />, {
-      wrapper: AllProviders,
-    });
+    const onSubmit = vi.fn();
+
+    render(
+      <>
+        <ProductForm product={product} onSubmit={onSubmit} />
+        <Toaster />
+      </>,
+      {
+        wrapper: AllProviders,
+      }
+    );
 
     return {
+      onSubmit,
+
       expectErrorToBeInTheDocument: (errorMessage: RegExp) => {
         const error = screen.getByRole('alert');
         expect(error).toBeInTheDocument();
@@ -50,7 +61,7 @@ describe('ProductForom', () => {
           id: 1,
           name: 'a',
           price: 1,
-          categoryId: 1,
+          categoryId: category.id,
         };
 
         const fill = async (product: FormData) => {
@@ -62,7 +73,7 @@ describe('ProductForom', () => {
           if (product.price !== undefined)
             await user.type(priceInput, product.price.toString());
 
-          await user.tab() // temp fix for the Act warning in the console
+          await user.tab(); // temp fix for the Act warning in the console
           await user.click(categoryInput);
           const options = screen.getAllByRole('option');
           await user.click(options[0]);
@@ -176,4 +187,27 @@ describe('ProductForom', () => {
       expectErrorToBeInTheDocument(errorMessage);
     }
   );
+
+  it('should call onSubmit with the correct data', async () => {
+    const { waitForFormToLoad, onSubmit } = renderComponent();
+
+    const form = await waitForFormToLoad();
+    await form.fill(form.validData);
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-assignment
+    const { id, ...formData } = form.validData;
+    expect(onSubmit).toBeCalledWith(formData);
+  });
+
+  it('should display a toast if submission fails', async () => {
+    const { waitForFormToLoad, onSubmit } = renderComponent();
+    onSubmit.mockRejectedValue({}); // recall onSubmit is mock function
+
+    const form = await waitForFormToLoad();
+    await form.fill(form.validData);
+
+    const toast = await screen.findByRole('status');
+    expect(toast).toBeInTheDocument()
+    expect(toast).toHaveTextContent(/error/i);
+  });
 });
