@@ -5,14 +5,23 @@ import { faker } from "@faker-js/faker";
 export const db = factory({
   category: {
     id: primaryKey(faker.number.int),
-    name: faker.commerce.department, 
-    products: manyOf('product') // a category has many product
+    name: faker.commerce.department,
+    products: manyOf("product"), // a category has many product
   },
   product: {
     id: primaryKey(faker.number.int),
     name: faker.commerce.productName,
     price: () => faker.number.int({ min: 1, max: 100 }),
     categoryId: faker.number.int,
-    category: oneOf('category') // a product has one category
+    category: oneOf("category"), // a product has one category
   },
 });
+
+export const getProductsByCategory = (categoryId: number) =>
+  db.product.findMany({
+    where: {
+      categoryId: {
+        equals: categoryId,
+      },
+    },
+  });
