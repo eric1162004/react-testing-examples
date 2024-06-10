@@ -1,67 +1,29 @@
-import { Select, Table } from "@radix-ui/themes";
-import axios from "axios";
-import { useState } from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import { useQuery } from "react-query";
-import QuantitySelector from "../components/QuantitySelector";
-import { Category, Product } from "../entities";
+import { Table } from '@radix-ui/themes';
+import axios from 'axios';
+import { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { useQuery } from 'react-query';
+import CategorySelect from '../components/CategorySelect';
+import QuantitySelector from '../components/QuantitySelector';
+import { Product } from '../entities';
 
 function BrowseProducts() {
-
-  const categroiesQuery = useQuery<Category[], Error>({
-    queryKey: ['categories'],
-    queryFn: () => axios.get<Category[]>('/categories').then(res => res.data)
-  })
-
   const productsQuery = useQuery<Product[], Error>({
     queryKey: ['products'],
-    queryFn: () => axios.get<Product[]>('/products').then(res => res.data)
-  })
+    queryFn: () => axios.get<Product[]>('/products').then((res) => res.data),
+  });
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<
     number | undefined
   >();
 
-  if (productsQuery.error) return <div>Error: {productsQuery.error.message}</div>;
-
-  const renderCategories = () => {
-    const { isLoading, error, data: categories } = categroiesQuery;
-
-    if (isLoading)
-      return (
-        <div role="progressbar" aria-label="Loading categories">
-          <Skeleton />
-        </div>
-      );
-
-    if (error) return null;
-
-    return (
-      <Select.Root
-        onValueChange={(categoryId) =>
-          setSelectedCategoryId(parseInt(categoryId))
-        }
-      >
-        <Select.Trigger placeholder="Filter by Category" />
-        <Select.Content>
-          <Select.Group>
-            <Select.Label>Category</Select.Label>
-            <Select.Item value="all">All</Select.Item>
-            {categories?.map((category) => (
-              <Select.Item key={category.id} value={category.id.toString()}>
-                {category.name}
-              </Select.Item>
-            ))}
-          </Select.Group>
-        </Select.Content>
-      </Select.Root>
-    );
-  };
+  if (productsQuery.error)
+    return <div>Error: {productsQuery.error.message}</div>;
 
   const renderProducts = () => {
     const skeletons = [1, 2, 3, 4, 5];
-    const { error, data: products, isLoading} = productsQuery
+    const { error, data: products, isLoading } = productsQuery;
 
     if (error) return <div>Error: {error.message}</div>;
 
@@ -79,8 +41,8 @@ function BrowseProducts() {
           </Table.Row>
         </Table.Header>
         <Table.Body
-          role={isLoading ? "progressbar" : undefined}
-          aria-label={isLoading ? "Loading products" : undefined}
+          role={isLoading ? 'progressbar' : undefined}
+          aria-label={isLoading ? 'Loading products' : undefined}
         >
           {isLoading &&
             skeletons.map((skeleton) => (
@@ -114,7 +76,11 @@ function BrowseProducts() {
   return (
     <div>
       <h1>Products</h1>
-      <div className="max-w-xs">{renderCategories()}</div>
+      <div className="max-w-xs">
+        <CategorySelect
+          onChange={(categoryId) => setSelectedCategoryId(categoryId)}
+        />
+      </div>
       {renderProducts()}
     </div>
   );
