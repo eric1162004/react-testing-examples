@@ -58,3 +58,10 @@ you can also use redux for caching but it adds complexity to the project
 ## Testing State Management Solutions
 - React Context, Redux, Zustand
 - Test the behavior, not the implementation
+
+## Authentication Testing
+- Registration
+- Login 
+- Log out
+- Change password
+- Update profile data

@@ -8,6 +8,8 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers()); // make sure you use reset, not restore
 afterAll(() => server.close());
 
+vi.mock('@auth0/auth0-react'); // all function from this module with be replace
+
 // require for testing Radix UI lib
 global.ResizeObserver = ResizeObserver;
 
